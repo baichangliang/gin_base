@@ -13,7 +13,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func ReleaseToken(m models.Manager, jwtKey []byte) (string, error) {
+func ReleaseToken(m models.Manager) (string, error) {
 	expirationTime := time.Now().Add(7 * 24 * time.Hour)
 	claims := &Claims{
 		ManagerId: m.ID,

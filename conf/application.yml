@@ -10,6 +10,6 @@ datasource:
   charset: utf8mb4
   loc: Asia/Shanghai
 wxPay:
-  appid: wx31e3c49c4f5d4cba
-  mchId: 1607527753
-  apiKey: APILZZYdshfdshfsdj32784jdsjf873u
+  appid: appid
+  mchId: mchId
+  apiKey: apiKey

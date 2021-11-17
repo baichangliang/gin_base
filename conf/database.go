@@ -2,6 +2,7 @@ package conf
 
 import (
 	"fmt"
+	"gin_test/app/models"
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 	"net/url"
@@ -36,7 +37,7 @@ func InitDB() *gorm.DB {
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return "tb_" + defaultTableName
 	}
-	db.AutoMigrate()
+	db.AutoMigrate(models.Manager{})
 
 	DB = db
 	return db
