@@ -1,4 +1,4 @@
-package user
+package manager
 
 import (
 	"gin_test/app/models"

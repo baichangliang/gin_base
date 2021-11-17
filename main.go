@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"gin_test/app/log"
-	"gin_test/app/user"
+	"gin_test/app/manager"
 	"gin_test/conf"
 	"gin_test/middleware"
 	"gin_test/routers"
@@ -25,7 +25,7 @@ func main() {
 		}
 	}(db)
 	// 分包陆游
-	routers.Include(log.Routers, user.Routers)
+	routers.Include(log.Routers, manager.Routers)
 	// 初始化路由
 	r := routers.Init()
 	r.Use(middleware.LoggerToFile())

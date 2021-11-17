@@ -1,4 +1,4 @@
-package user
+package manager
 
 import "github.com/gin-gonic/gin"
 
