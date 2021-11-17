@@ -5,6 +5,7 @@ import (
 	"gin_test/app/log"
 	"gin_test/app/user"
 	"gin_test/conf"
+	"gin_test/middleware"
 	"gin_test/routers"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -27,6 +28,7 @@ func main() {
 	routers.Include(log.Routers, user.Routers)
 	// 初始化路由
 	r := routers.Init()
+	r.Use(middleware.LoggerToFile())
 	if err := r.Run(); err != nil {
 		fmt.Printf("startup service failed, err:%v\n\n", err)
 	}
