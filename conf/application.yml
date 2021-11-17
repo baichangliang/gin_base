@@ -1,0 +1,15 @@
+server:
+  port: 8080
+datasource:
+  driverName: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: go_gin_base
+  username: go_gin
+  password: Xiot!918
+  charset: utf8mb4
+  loc: Asia/Shanghai
+wxPay:
+  appid: wx31e3c49c4f5d4cba
+  mchId: 1607527753
+  apiKey: APILZZYdshfdshfsdj32784jdsjf873u
