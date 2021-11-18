@@ -6,8 +6,8 @@ func Routers(e *gin.Engine) {
 
 	ord := e.Group("/api/goods/")
 	{
-		ord.POST("category/", CreateCategory) // 商品类别
-		ord.GET("category/", ListCategory)    // 商品类别
+		ord.POST("genre/", CreateGenre) // 商品类别创建
+		ord.GET("genre/", ListGenre)    // 商品类别列类
 	}
 
 }
