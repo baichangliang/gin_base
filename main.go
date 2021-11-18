@@ -30,7 +30,7 @@ func main() {
 	// 初始化路由
 	r := routers.Init()
 	r.Use(middleware.LoggerToFile())
-	if err := r.Run(); err != nil {
+	if err := r.Run("0.0.0.0:8080"); err != nil {
 		fmt.Printf("startup service failed, err:%v\n\n", err)
 	}
 }
