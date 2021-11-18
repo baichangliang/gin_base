@@ -58,3 +58,46 @@ func ListGenre(c *gin.Context) {
 		"data": genres, "page": page, "pageSize": pageSize, "count": total,
 	}, "success")
 }
+
+// DetailsGenre 商品类别详情
+func DetailsGenre(c *gin.Context) {
+	instance := &models.Genre{}
+	DB := conf.GetDB()
+	DB = DB.Where("id = ?", c.Param("ID"))
+	// 进行查询
+	if err := DB.Preload("Team").First(&instance).Error; err != nil {
+		Fail(c, gin.H{"err": err.Error()}, "未找到")
+		return
+	}
+	// 结果返回
+	Success(c, gin.H{"data": instance}, "success")
+}
+
+// UpdateGenre 商品类别更新
+func UpdateGenre(c *gin.Context) {
+	instance := &models.Genre{}
+	DB := conf.GetDB()
+	DB = DB.Where("id = ?", c.Param("ID"))
+	// 进行查询
+	if err := DB.First(&instance).Error; err != nil {
+		return
+	}
+
+	var requestUser models.Genre
+	err := c.BindJSON(&requestUser)
+	if err != nil {
+		Fail(c, gin.H{"err": err}, "参数错误")
+		return
+	}
+	DB.Model(instance).Updates(requestUser)
+	// 结果返回
+	Success(c, gin.H{
+		"data": instance,
+	}, "success")
+}
+
+// DeleteGenre 商品类别删除
+func DeleteGenre(c *gin.Context) {
+	_ = conf.GetDB().Where("id = ?", c.Param("ID")).Delete(&models.Genre{})
+	Success(c, gin.H{}, "success")
+}
