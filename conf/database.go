@@ -37,7 +37,7 @@ func InitDB() *gorm.DB {
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return "tb_" + defaultTableName
 	}
-	db.AutoMigrate(models.Manager{})
+	db.AutoMigrate(models.Manager{}, models.Category{})
 
 	DB = db
 	return db
