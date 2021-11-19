@@ -3,7 +3,6 @@ package manager
 import (
 	"fmt"
 	"gin_test/app/models"
-	"gin_test/conf"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
@@ -11,7 +10,7 @@ import (
 
 // CreateManager 管理员创建
 func CreateManager(ctx *gin.Context) {
-	DB := conf.GetDB()
+	DB := models.GetDB()
 	var manager models.Manager
 
 	if err := ctx.BindJSON(&manager); err != nil {
@@ -54,7 +53,7 @@ func Login(ctx *gin.Context) {
 		Fail(ctx, gin.H{"err": err.Error()}, "参数错误")
 		return
 	}
-	PassWord, UserName, DB := loginStruct.Password, loginStruct.UserName, conf.GetDB()
+	PassWord, UserName, DB := loginStruct.Password, loginStruct.UserName, models.GetDB()
 	if PassWord != "" && UserName != "" {
 		DB = DB.Where("user_name = ?", UserName)
 	} else {

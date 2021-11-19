@@ -5,8 +5,8 @@ import (
 	"gin_test/app/goods"
 	"gin_test/app/log"
 	"gin_test/app/manager"
+	"gin_test/app/models"
 	"gin_test/app/order"
-	"gin_test/conf"
 	"gin_test/middleware"
 	"gin_test/routers"
 	_ "github.com/go-sql-driver/mysql"
@@ -20,7 +20,7 @@ func main() {
 	// InitConfig viper初始化调用
 	InitConfig()
 	// 数据库连接初始化
-	db := conf.InitDB()
+	db := models.InitDB()
 	defer func(db *gorm.DB) {
 		err := db.Close()
 		if err != nil {

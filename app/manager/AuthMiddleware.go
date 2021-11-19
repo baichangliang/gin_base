@@ -2,7 +2,6 @@ package manager
 
 import (
 	"gin_test/app/models"
-	"gin_test/conf"
 	"github.com/gin-gonic/gin"
 	"strings"
 )
@@ -23,7 +22,7 @@ func AuthMiddleware(auth string) gin.HandlerFunc {
 			return
 		}
 		ManagerId := claims.ManagerId
-		DB := conf.GetDB()
+		DB := models.GetDB()
 		var m models.Manager
 		DB.First(&m, ManagerId)
 		// 用户

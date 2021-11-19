@@ -2,7 +2,6 @@ package goods
 
 import (
 	"gin_test/app/models"
-	"gin_test/conf"
 	"github.com/gin-gonic/gin"
 	"strconv"
 	"strings"
@@ -10,7 +9,7 @@ import (
 
 // CreateGenre 商品类别创建
 func CreateGenre(ctx *gin.Context) {
-	DB := conf.GetDB()
+	DB := models.GetDB()
 	var genre models.Genre
 
 	if err := ctx.BindJSON(&genre); err != nil {
@@ -31,7 +30,7 @@ func CreateGenre(ctx *gin.Context) {
 // ListGenre 商品类别列表
 func ListGenre(c *gin.Context) {
 	genres := make([]models.Genre, 0)
-	DB := conf.GetDB()
+	DB := models.GetDB()
 	page, _ := strconv.Atoi(c.Query("page"))
 	pageSize, _ := strconv.Atoi(c.Query("page_size"))
 
@@ -62,7 +61,7 @@ func ListGenre(c *gin.Context) {
 // DetailsGenre 商品类别详情
 func DetailsGenre(c *gin.Context) {
 	instance := &models.Genre{}
-	DB := conf.GetDB()
+	DB := models.GetDB()
 	DB = DB.Where("id = ?", c.Param("ID"))
 	// 进行查询
 	if err := DB.Preload("Team").First(&instance).Error; err != nil {
@@ -76,7 +75,7 @@ func DetailsGenre(c *gin.Context) {
 // UpdateGenre 商品类别更新
 func UpdateGenre(c *gin.Context) {
 	instance := &models.Genre{}
-	DB := conf.GetDB()
+	DB := models.GetDB()
 	DB = DB.Where("id = ?", c.Param("ID"))
 	// 进行查询
 	if err := DB.First(&instance).Error; err != nil {
@@ -98,6 +97,6 @@ func UpdateGenre(c *gin.Context) {
 
 // DeleteGenre 商品类别删除
 func DeleteGenre(c *gin.Context) {
-	_ = conf.GetDB().Where("id = ?", c.Param("ID")).Delete(&models.Genre{})
+	_ = models.GetDB().Where("id = ?", c.Param("ID")).Delete(&models.Genre{})
 	Success(c, gin.H{}, "success")
 }
